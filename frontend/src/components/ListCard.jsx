@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import img from "../assets/code.png"
+import img2 from "../assets/project_logo.jpeg"
 import deleteImg from "../assets/delete.png"
 import { api_base_url } from '../helper';
 import { useNavigate } from 'react-router-dom';
@@ -11,9 +11,9 @@ const ListCard = () => {
 
     return (
         <>
-            <div className="listCard mb-2 w-[full] flex items-center justify-between p-[10px] bg-[#141414] cursor-pointer rounded-lg hover:bg-[#202020]">
+            <div className="listCard mb-3 w-[full] flex items-center justify-between p-[10px] bg-[#141414] cursor-pointer rounded-lg hover:bg-[#202020]">
                 <div onClick={() => { }} className='flex items-center gap-2'>
-                    <img className='w-[80px]' src={img} alt="logo" />
+                    <img className='w-[90px] rounded-md' src={img2} alt="logo" />
                     <div>
                         <h3 className='text-[20px]'>Project 1</h3>
                         <p className='text-[gray] text-[14px]'>Created in {new Date().toDateString()}</p>

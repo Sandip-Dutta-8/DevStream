@@ -2,19 +2,17 @@ import React, { useEffect, useState } from 'react'
 import logo from "../assets/code.png"
 import { Link, useNavigate } from 'react-router-dom'
 import Avatar from 'react-avatar';
-import { MdLightMode } from "react-icons/md";
-import { BsGridFill } from "react-icons/bs";
+import { BsGridFill, BsList } from "react-icons/bs";
 import { api_base_url, toggleClass } from '../helper';
 
-const NavBar = () => {
+const NavBar = ({isGridLayout, setIsGridLayout}) => {
 
     const navigate = useNavigate();
-
     const [data, setData] = useState(null);
-    const [error, setError] = useState("");;
+    const [error, setError] = useState("");
 
     return (
-        <>
+        <div>
             <div className="navbar flex items-center justify-between px-[100px] h-[80px] bg-[#141414]">
                 <div className="flex items-center gap-3">
                     <img className='w-[50px] cursor-pointer' src={logo} alt="logo" />
@@ -25,15 +23,14 @@ const NavBar = () => {
                     <Avatar onClick={() => { toggleClass(".dropDownNavbar", "hidden") }} name="Sandip Dutta" size="40" round="50%" className='cursor-pointer ml-2' />
                 </div>
 
-                <div className='dropDownNavbar hidden absolute right-[60px] top-[80px] shadow-lg shadow-black/50 p-[10px] rounded-lg bg-[#1A1919] w-[150px] h-[160px]'>
+                <div className='dropDownNavbar hidden absolute right-[60px] top-[75px] shadow-lg shadow-black/50 p-[10px] rounded-lg bg-[#1A1919] w-[150px]'>
                     <div className='py-[10px] border-b-[1px] border-b-[#fff]'>
                         <h3 className='text-[17px]' style={{ lineHeight: 1 }}>Sandip Dutta</h3>
                     </div>
-                    <i className='flex items-center gap-2 mt-3 mb-2 cursor-pointer' style={{ fontStyle: "normal" }}><MdLightMode className='text-[20px]' />Light mode</i>
-                    <i onClick={() => {}} className='flex items-center gap-2 mt-3 mb-2 cursor-pointer' style={{ fontStyle: "normal" }}><BsGridFill className='text-[20px]' />layout</i>
+                    <i onClick={() => {setIsGridLayout(!isGridLayout)}} className='flex items-center gap-2 mt-3 mb-2 cursor-pointer' style={{ fontStyle: "normal" }}>{isGridLayout ? <BsList className='text-[25px]'/> : <BsGridFill className='text-[20px]' />}{isGridLayout? "List" : "Grid"} layout</i>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

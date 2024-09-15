@@ -9,8 +9,8 @@ const Home = () => {
   const [isGridLayout, setIsGridLayout] = useState(false);
 
   return (
-    <>
-      <NavBar />
+    <div>
+      <NavBar isGridLayout={isGridLayout} setIsGridLayout={setIsGridLayout}/>
       <div className='flex items-center justify-between px-[100px] my-[40px]'>
         <h2 className='text-2xl'>Hi, Sandip 👋</h2>
         <div className='flex items-center gap-2'>
@@ -55,7 +55,7 @@ const Home = () => {
             </div>
         }
       </div>
-    </>
+    </div>
   )
 }
 
