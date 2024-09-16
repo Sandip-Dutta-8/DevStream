@@ -4,19 +4,41 @@ import deleteImg from "../assets/delete.png"
 import { api_base_url } from '../helper';
 import { useNavigate } from 'react-router-dom';
 
-const ListCard = () => {
+const ListCard = ({ item }) => {
 
     const navigate = useNavigate();
     const [isDeleteModelShow, setIsDeleteModelShow] = useState(false);
 
+    const deleteProj = (id) => {
+        fetch(api_base_url + "/deleteProject", {
+            mode: "cors",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                progId: id,
+                userId: localStorage.getItem("userId")
+            })
+        }).then(res => res.json()).then(data => {
+            if (data.success) {
+                setIsDeleteModelShow(false)
+                window.location.reload()
+            } else {
+                alert(data.message)
+                setIsDeleteModelShow(false)
+            }
+        })
+    }
+
     return (
         <>
             <div className="listCard mb-3 w-[full] flex items-center justify-between p-[10px] bg-[#141414] cursor-pointer rounded-lg hover:bg-[#202020]">
-                <div onClick={() => { }} className='flex items-center gap-2'>
+                <div onClick={() => {navigate(`/editor/${item._id}`)}} className='flex items-center gap-2'>
                     <img className='w-[90px] rounded-md' src={img2} alt="logo" />
                     <div>
-                        <h3 className='text-[20px]'>Project 1</h3>
-                        <p className='text-[gray] text-[14px]'>Created in {new Date().toDateString()}</p>
+                        <h3 className='text-[20px]'>{item.title}</h3>
+                        <p className='text-[gray] text-[14px]'>Created in {new Date(item.date).toDateString()}</p>
                     </div>
                 </div>
                 <div>
@@ -30,7 +52,7 @@ const ListCard = () => {
                         <h3 className='text-3xl'>Do you want to delete <br />
                             this project?</h3>
                         <div className='flex w-full mt-5 items-center gap-[10px]'>
-                            <button onClick={() => {}} className='p-[10px] rounded-lg bg-[#FF4343] text-white cursor-pointer min-w-[49%]'>Delete</button>
+                            <button onClick={()=>{deleteProj(item._id)}} className='p-[10px] rounded-lg bg-[#FF4343] text-white cursor-pointer min-w-[49%]'>Delete</button>
                             <button onClick={() => { setIsDeleteModelShow(false) }} className='p-[10px] rounded-lg bg-[#1A1919] text-white cursor-pointer min-w-[49%]'>Cancel</button>
                         </div>
                     </div>

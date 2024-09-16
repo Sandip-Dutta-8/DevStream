@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import image from '../assets/sign-up3.jpg'
 import logo from '../assets/code.png'
+import { api_base_url } from '../helper'
 
 const SignIn = () => {
 
@@ -12,6 +13,32 @@ const SignIn = () => {
 
     const navigate = useNavigate();
 
+    const submitForm = (e) => {
+        e.preventDefault();
+        fetch(api_base_url + "/login", {
+            mode: "cors",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: pwd
+            })
+        }).then(res => res.json()).then(data => {
+            if (data.success === true) {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("isLoggedIn", true);
+                localStorage.setItem("userId", data.userId);
+                setTimeout(() => {
+                    window.location.href = "/"
+                }, 200);
+            } else {
+                setError(data.message);
+            }
+        })
+    }
+
     return (
         <>
             <div className="container w-screen min-h-screen flex items-center justify-between pl-[100px]">
@@ -20,7 +47,7 @@ const SignIn = () => {
                         <img className='w-[60px]' src={logo} alt="logo" />
                         <h1 className='text-3xl font-bold'>Login</h1>
                     </div>
-                    <form onSubmit={() => { }} className='w-full mt-[60px]'>
+                    <form onSubmit={submitForm} className='w-full mt-[60px]'>
                         <div className="inputBox">
                             <input required onChange={(e) => { setEmail(e.target.value) }} value={email} type="email" placeholder='Email' />
                         </div>
