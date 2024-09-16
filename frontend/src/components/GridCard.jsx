@@ -12,8 +12,8 @@ const GridCard = () => {
         <>
             <div className="gridCard bg-[#141414] w-[270px] p-[10px] h-[180px] cursor-pointer hover:bg-[#202020] rounded-lg shadow-sm shadow-black/50">
                 <div onClick={() => {}}>
-                    <img className="w-[90px] rounded-lg" src={codeImg} alt="project-img" />
-                    <h3 className='text-[20px] w-[90%] line-clamp-1'>Project 1</h3>
+                    <img className="w-[100px] rounded-lg" src={codeImg} alt="project-img" />
+                    <h3 className='text-[20px] w-[90%] line-clamp-1 mt-3'>Project 1</h3>
                 </div>
                 <div className='flex items-center justify-between'>
                     <p className='text-[14px] text-[gray]'>Created in {new Date().toDateString()}</p>

@@ -109,3 +109,20 @@ html {
         background-color: #c2c1c1;
     }
 }
+
+.lightMode .createModel{
+    background-color: #f0f0f0;
+}
+.lightMode .createModel .inputBox {
+    background-color: #dfdcdc !important;
+}
+.lightMode .createModel .inputBox input {
+    color: #0b0b0b !important;
+}
+
+.lightMode .createModel .cancel{
+    background-color: #a4a4a4 !important;
+    &:hover{
+        background-color: #818181 !important;
+    }
+}

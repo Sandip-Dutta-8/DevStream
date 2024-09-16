@@ -52,7 +52,7 @@ const CodeEditor = () => {
   useEffect(() => {
     setTimeout(() => {
       run();
-    }, 500);
+    }, 1000);
   }, [htmlCode, cssCode, jsCode, isExpanded]);
 
   return (
