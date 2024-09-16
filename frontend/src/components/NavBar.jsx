@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import Avatar from 'react-avatar';
 import { BsGridFill, BsList } from "react-icons/bs";
 import { api_base_url, toggleClass } from '../helper';
+import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
-const NavBar = ({isGridLayout, setIsGridLayout}) => {
+const NavBar = ({ isGridLayout, setIsGridLayout, changeTheme, isLightMode, setIsLightMode }) => {
 
     const navigate = useNavigate();
     const [data, setData] = useState(null);
@@ -27,7 +28,8 @@ const NavBar = ({isGridLayout, setIsGridLayout}) => {
                     <div className='py-[10px] border-b-[1px] border-b-[#fff]'>
                         <h3 className='text-[17px]' style={{ lineHeight: 1 }}>Sandip Dutta</h3>
                     </div>
-                    <i onClick={() => {setIsGridLayout(!isGridLayout)}} className='flex items-center gap-2 mt-3 mb-2 cursor-pointer' style={{ fontStyle: "normal" }}>{isGridLayout ? <BsList className='text-[25px]'/> : <BsGridFill className='text-[20px]' />}{isGridLayout? "List" : "Grid"} layout</i>
+                    <i onClick={() => { changeTheme() }} className='flex items-center gap-2 mt-3 mb-2 cursor-pointer' style={{ fontStyle: "normal" }}>{isLightMode ? <MdDarkMode className='text-[20px]' /> : <MdLightMode className='text-[20px]' />} {isLightMode ? "Dark" : "Light"} mode</i>
+                    <i onClick={() => { setIsGridLayout(!isGridLayout) }} className='flex items-center gap-2 mt-3 mb-2 cursor-pointer' style={{ fontStyle: "normal" }}>{isGridLayout ? <BsList className='text-[25px]' /> : <BsGridFill className='text-[20px]' />}{isGridLayout ? "List" : "Grid"} layout</i>
                 </div>
             </div>
         </div>

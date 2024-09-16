@@ -53,7 +53,7 @@ const CodeEditor = () => {
     setTimeout(() => {
       run();
     }, 500);
-  }, [htmlCode, cssCode, jsCode]);
+  }, [htmlCode, cssCode, jsCode, isExpanded]);
 
   return (
     <>
