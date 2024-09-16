@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://ayandutta2005:sandipdutta37@codeide.2vvgw.mongodb.net/?retryWrites=true&w=majority&appName=codeIDE', {
+mongoose.connect('your mongoDb url', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
