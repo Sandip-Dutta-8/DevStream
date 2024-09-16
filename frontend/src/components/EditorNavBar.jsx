@@ -2,7 +2,7 @@ import React from 'react'
 import logo from "../assets/code.png"
 import { FiDownload } from "react-icons/fi";
 
-const EditorNavBar = ({title}) => {
+const EditorNavBar = ({title, downloadCode}) => {
     return (
         <>
             <div className="EditiorNavbar flex items-center justify-between px-[100px] h-[80px] bg-[#141414]">
@@ -11,7 +11,7 @@ const EditorNavBar = ({title}) => {
                     <h1 className='font-bold text-2xl'>Dev Stream</h1>
                 </div>
                 <p>File / <span className='text-[gray]'>{title}</span></p>
-                <i className='p-[8px] btn bg-black rounded-[5px] cursor-pointer text-[20px]'><FiDownload /></i>
+                <i onClick={downloadCode} className='p-[8px] btn bg-black rounded-[5px] cursor-pointer text-[20px] hover:bg-[#202020]'><FiDownload /></i>
             </div>
         </>
     )

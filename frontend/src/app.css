@@ -94,6 +94,9 @@ html {
 .lightMode .btn {
     background-color: #C2C1C1;
     color: #000;
+    &:hover{
+        background-color: #dfdcdc;
+    }
 }
 
 .lightMode .listCard {

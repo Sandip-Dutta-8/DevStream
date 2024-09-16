@@ -5,6 +5,8 @@ import { MdLightMode } from 'react-icons/md';
 import { AiOutlineExpandAlt } from "react-icons/ai";
 import { api_base_url } from '../helper';
 import { useParams } from 'react-router-dom';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 const CodeEditor = () => {
   const [tab, setTab] = useState("html");
@@ -19,7 +21,7 @@ const CodeEditor = () => {
   const { project_id } = useParams();
 
   const changeTheme = () => {
-    const editorNavbar = document.querySelector(".EditorNavbar");
+    const editorNavbar = document.querySelector(".EditiorNavbar");
     if (isLightMode) {
       editorNavbar.style.background = "#141414";
       document.body.classList.remove("lightMode");
@@ -45,8 +47,8 @@ const CodeEditor = () => {
   useEffect(() => {
     setTimeout(() => {
       run();
-    }, 200);
-  }, [htmlCode, cssCode, jsCode]);
+    }, 1000);
+  }, [htmlCode, cssCode, jsCode, isExpanded]);
 
   useEffect(() => {
     fetch(api_base_url + "/getProject", {
@@ -65,10 +67,10 @@ const CodeEditor = () => {
         console.log("API Response:", data);
         // Ensure data and project are defined before updating state
         if (data && data.project) {
-          setHtmlCode(data.project.htmlCode);  
-          setCssCode(data.project.cssCode);  
-          setJsCode(data.project.jsCode); 
-          setTitle(data.project.title); 
+          setHtmlCode(data.project.htmlCode);
+          setCssCode(data.project.cssCode);
+          setJsCode(data.project.jsCode);
+          setTitle(data.project.title);
         } else {
           console.error("Project data not found or malformed");
           alert("Failed to load project data.");
@@ -79,7 +81,7 @@ const CodeEditor = () => {
         alert("Failed to load project data.");
       });
   }, [project_id]);
-  
+
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -124,10 +126,34 @@ const CodeEditor = () => {
     };
   }, [project_id, htmlCode, cssCode, jsCode]);
 
+  const downloadCode = () => {
+    const zip = new JSZip();
+
+    // Add HTML file
+    zip.file("index.html", htmlCode);
+
+    // Add CSS file
+    zip.file("styles.css", cssCode);
+
+    // Add JS file
+    zip.file("scripts.js", jsCode);
+
+    // Generate zip and trigger download
+    zip.generateAsync({ type: "blob" })
+      .then((content) => {
+        saveAs(content, `${title || 'project'}.zip`);
+      })
+      .catch((error) => {
+        console.error("Error generating zip file:", error);
+        alert("Failed to download code.");
+      });
+  };
+
+
 
   return (
     <>
-      <EditiorNavbar title={title}/>
+      <EditiorNavbar title={title} downloadCode={downloadCode}/>
       <div className="flex">
         <div className={`left w-[${isExpanded ? "100%" : "50%"}]`}>
           <div className="tabs flex items-center justify-between gap-2 w-full bg-[#1A1919] h-[50px] px-[40px]">

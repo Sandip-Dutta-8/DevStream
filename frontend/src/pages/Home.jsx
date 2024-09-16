@@ -132,22 +132,22 @@ const Home = () => {
           isGridLayout ?
             <div className='grid px-[100px]'>
               {
-                // filteredData.length > 0 ? filteredData.map((item, index) => (
-                //   <GridCard key={index} item={item} />
-                // )) : <p>No projects found</p>
-                data?data.map((item, index) => {
-                  return <GridCard key={index} item={item} />
-                }) : <p>No projects found</p>
+                filteredData.length > 0 ? filteredData.map((item, index) => (
+                  <GridCard key={index} item={item} />
+                )) : <p>No projects found</p>
+                // data?data.map((item, index) => {
+                //   return <GridCard key={index} item={item} />
+                // }) : <p>No projects found</p>
               }
             </div>
             : <div className='list px-[100px]'>
               {
-                // filteredData.length > 0 ? filteredData.map((item, index) => (
-                //   <ListCard key={index} item={item} />
-                // )) : <p>No projects found</p>
-                data?data.map((item, index) => {
-                  return <ListCard key={index} item={item} />
-                }) : <p>No projects found</p>
+                filteredData.length > 0 ? filteredData.map((item, index) => (
+                  <ListCard key={index} item={item} />
+                )) : <p>No projects found</p>
+                // data?data.map((item, index) => {
+                //   return <ListCard key={index} item={item} />
+                // }) : <p>No projects found</p>
               }
             </div>
         }
